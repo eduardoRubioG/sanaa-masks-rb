@@ -1,0 +1,13 @@
+$theme-colors: (
+  "dark-green": #283618, 
+  "light-green": #606C38,
+  "off-white": #FEFAE0, 
+  "light-orange": #DDA15E,
+  "dark-orange": #BC6C25,
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "variables";
+
+@import "layout";
+@import "navbar";

@@ -1,0 +1,26 @@
+.nav-btn-custom {
+  background-color: #fefae0;
+  font-weight: 600;
+  color: #283618;
+  align-self: center;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  padding: 0 1rem;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .nav-btn-custom {
+    color: rgba(255, 255, 255, 0.5);
+    background: none;
+    font-weight: 300;
+    margin-right: auto;
+    padding-left: 0;
+    &:focus {
+      outline: none;
+      color:  rgba(255, 255, 255, 0.75);
+    }
+  }
+}

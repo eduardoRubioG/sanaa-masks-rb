@@ -1,10 +1,9 @@
-# Gatsby React Bootstrap Starter
+# Masks by Sanaa Site
 
-A GatsbyJS starter that includes
-
+## Libraries/Frameworks Used
+- GatsbyJS
+- Stripe 
+- Contentful
 - react-bootstrap
 - react-icons
-- sticky on scroll navbar
 - SASS compiler
-- basic layout
-# sanaa-masks-rb
