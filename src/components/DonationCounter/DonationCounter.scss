@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+.donation-counter {
+  display: flex;
+  justify-content: center;
+  margin: 4rem 0;
+  &__text {
+    color: $off-white;
+    font-size: 2rem;
+  }
+}

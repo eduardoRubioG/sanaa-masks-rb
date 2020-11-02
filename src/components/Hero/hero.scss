@@ -1,7 +1,5 @@
 .hero {
   &__container {
-    // padding: 1rem;
-    // border: 3px solid red;
     display: flex;
     flex-direction: column;
     height: calc(100vh - 116px);
@@ -14,8 +12,8 @@
   }
 
   &__text-content {
-    // border: 2px solid blue;
     padding: .5rem 0;
+    color: #283618;
     & > h2 {
       text-align: center;
       font-weight: 200;
@@ -30,7 +28,7 @@
       display: none;
     }
     &--sm {
-      // margin: auto 0;
+      /* hello there */ 
     }
   }
 
@@ -45,8 +43,9 @@
     display: flex;
     justify-content: space-around;
     margin: 0 auto; 
-    padding: 0.25rem;
+    padding-bottom: 1.5rem;
     width: 70%;
+    max-width: 275px;
   }
 
   &__wave { 

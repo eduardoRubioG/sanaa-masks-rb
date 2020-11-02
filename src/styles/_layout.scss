@@ -1,6 +1,10 @@
+@import './variables';
+html {
+  background-color: $off-white; 
+}
 div.main {
   min-height: 100vh;
-  padding-bottom: 60px;
+  padding-bottom: 60px; 
 }
 
 div.full-height {
@@ -26,7 +30,7 @@ a.link-no-style {
     height: 60px;
     clear: both;
     background-color: $color-primary;
-    color: white;
+    color: $off-white;
     justify-content: center;
     width: 100%;
 

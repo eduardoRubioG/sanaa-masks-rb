@@ -1,0 +1,35 @@
+@import "../../styles/variables";
+.wire-selector {
+  display: flex;
+  justify-content: space-between;
+  // border: 1px solid red;
+  &__card {
+    // border: 1px solid blue;
+    width: 9rem;
+    height: 9rem;
+
+    & > button {
+      height: 100%;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      background-color: $off-white;
+      color: $dark-green;
+
+      border-radius: 22px;
+      background: #fefae0;
+      box-shadow: 9px 9px 18px #eae6ce, -9px -9px 18px rgba(#fffff2, 0.9);
+    }
+
+    &.active {
+      & > button {
+        background-color: $light-orange;
+        color: $off-white;
+
+        border-radius: 10px;
+        background: #dda15e;
+        box-shadow: inset 9px 9px 18px #c58f54, inset -9px -9px 18px #f5b368;
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import "../../styles/variables";
+.mask-builder {
+  // border: 1px solid red;
+  color: $dark-green; 
+  &__type-select {
+
+    &--tip {
+
+    }
+  }
+}

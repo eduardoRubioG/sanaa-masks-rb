@@ -1,0 +1,29 @@
+@import "../../styles/variables";
+.mask-section {
+  background-color: $off-white;
+  margin: 0 auto;
+  width: 85%;
+
+  &__humaans {
+    transform: translateY(-20%);
+  }
+
+  &__header {
+    color: $dark-green;
+    font-weight: 200;
+    padding-bottom: 2rem;
+
+    &--text {
+      font-size: 24px;
+    }
+  }
+
+  &__bar {
+    width: 25%;
+    max-width: 75px;
+    height: 2px;
+    background-color: $dark-green;
+    margin-left: 5px;
+    margin-bottom: 1rem;
+  }
+}
