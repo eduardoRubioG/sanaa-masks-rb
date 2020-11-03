@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   // pathPrefix: "/gatsby-react-bootstrap-starter",
   siteMetadata: {
@@ -27,6 +29,14 @@ module.exports = {
         theme_color: `#20232a`,
         display: `minimal-ui`,
       },
+    },
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: ['Product', 'Sku', 'Price'],
+        secretKey: process.env.STRIPE_SECRET_KEY,
+        downloadFiles: true,
+      }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
