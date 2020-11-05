@@ -11,7 +11,7 @@ export default class MaskSection extends Component {
     this.state = {
       orders: []
     }
-    console.log(props);
+    console.log("props in section", props);
   }
   render() {
     return (
@@ -25,7 +25,7 @@ export default class MaskSection extends Component {
             <div className="mask-section__bar" />
           </div>
           {/* MaskSelector */}
-          <MaskBuilder />
+          <MaskBuilder priceData={this.props.priceData} productData={this.props.productData}/>
 
           {/* Checkout Section  */}
         </section>

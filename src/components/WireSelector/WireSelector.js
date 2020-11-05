@@ -4,21 +4,20 @@ import "./WireSelector.scss"
 export default class WireSelector extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      wired: 1, // 1 is true
-    }
+    this.selectWiredOption = this.selectWiredOption.bind(this);
+    this.selectNotWiredOption = this.selectNotWiredOption.bind(this);
   }
 
   selectWiredOption = () => {
-    this.setState({ wired: 1 })
+    this.props.handleWiredSelection();
   }
   selectNotWiredOption = () => {
-    this.setState({ wired: 0 })
+    this.props.handleNotWiredSelection();
   }
 
   render() {
-    const isWiredSelected = this.state.wired === 1 ? "active" : ""
-    const isNotWiredSelected = this.state.wired === 0 ? "active" : ""
+    const isWiredSelected = this.props.wired === 1 ? "active" : ""
+    const isNotWiredSelected = this.props.wired === 0 ? "active" : ""
 
     return (
         <div className="wire-selector">

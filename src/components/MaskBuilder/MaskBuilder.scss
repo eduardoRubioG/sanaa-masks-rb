@@ -1,11 +1,43 @@
 @import "../../styles/variables";
 .mask-builder {
   // border: 1px solid red;
-  color: $dark-green; 
-  &__type-select {
+  color: $dark-green;
+  &__tip {
+    margin: 0.25rem;
+  }
 
-    &--tip {
+  &__designer {
+    padding: 1rem;
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+    background: #fefae0;
+    box-shadow: 9px 9px 18px #eae6ce, -9px -9px 18px rgba(#fffff2, 0.9);
 
+    &--header {
+      border: 1px solid red;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      align-content: center;
+      color: $dark-green;
     }
+
+    &--content {
+      border: 1px solid blue;
+    }
+  }
+}
+
+.categories-dropdown {
+  color: $off-white;
+  &:focus {
+    background-color: $dark-orange;
+    color: $off-white;
+  }
+  &__menu {
+    background-color: lighten($off-white, 5%);
+    box-shadow: 9px 9px 18px #eae6ce;
+    border: none;
   }
 }
