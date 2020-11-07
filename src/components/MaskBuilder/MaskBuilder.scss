@@ -1,7 +1,7 @@
 @import "../../styles/variables";
 .mask-builder {
-  // border: 1px solid red;
   color: $dark-green;
+  margin-bottom: 2rem;
   &__tip {
     margin: 0.25rem;
   }
@@ -9,22 +9,31 @@
   &__designer {
     padding: 1rem;
     width: 100%;
-    height: 400px;
+    min-width: 200px;
     border-radius: 10px;
     background: #fefae0;
-    box-shadow: 9px 9px 18px #eae6ce, -9px -9px 18px rgba(#fffff2, 0.9);
+    box-shadow: 9px 9px 18px #eae6ce, -9px -9px 18px rgba(#eae6ce, 0.3);
 
     &--header {
-      border: 1px solid red;
+      text-transform: capitalize;
+      padding: 0 0.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       align-content: center;
       color: $dark-green;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid rgba(#eae6ce, 0.5);
     }
 
     &--content {
-      border: 1px solid blue;
+      margin: 0 auto;
+      overflow: auto;
+      max-height: 320px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 0.25rem;
+      grid-auto-rows: minmax(100px, auto);
     }
   }
 }
@@ -39,5 +48,10 @@
     background-color: lighten($off-white, 5%);
     box-shadow: 9px 9px 18px #eae6ce;
     border: none;
+    &--items {
+      text-transform: capitalize;
+      color: $dark-green;
+    }
   }
+
 }
