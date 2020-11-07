@@ -5,6 +5,7 @@ import "./MaskBuilder.scss"
 import WireSelector from "../WireSelector/WireSelector"
 import ButtonGroup from "react-bootstrap/ButtonGroup"
 import Dropdown from "react-bootstrap/Dropdown"
+import MaskProduct from "../MaskProduct/MaskProduct"
 
 export class MaskBuilder extends Component {
   constructor(props) {
@@ -12,23 +13,16 @@ export class MaskBuilder extends Component {
     this.state = {
       wired: 1,
       types: [],
-      currentType: 'Select a type',
+      currentType: "Select a type",
+      products: [],
+      filteredProducts: [],
     }
     this.handleWiredSelection = this.handleWiredSelection.bind(this)
     this.handleNotWiredSelection = this.handleNotWiredSelection.bind(this)
-
-    console.log(props, "Mask builder props")
-    // this.serializeData(props.priceData.edges, props.productData.edges);
   }
 
   componentDidMount() {
     this.serializeData(this.props.priceData.edges, this.props.productData.edges)
-  }
-
-  /* Dev functions */
-
-  print = (msg = " >>> ", ...params) => {
-    console.log(msg, ...params)
   }
 
   /* Wire selector helper functions */
@@ -40,7 +34,6 @@ export class MaskBuilder extends Component {
   }
 
   /* Data processing */
-
   serializeData(priceData, productData) {
     const serializedPrices = priceData.map(price =>
       this.serializePriceData(price)
@@ -57,31 +50,24 @@ export class MaskBuilder extends Component {
           ...serializedPrices.find(
             itmInner => itmInner.name === serializedProducts[i].name
           ),
-        });
+        })
       }
       if (merged.length) {
         merged.forEach(product => {
           if (product.type) {
             types.push(...product.type)
           }
-        });
-        types = types.map((type) => {
-          return type.replace(/\w+/g, function(txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1);
-          });
-        });
-        types.unshift('All');
-        types = [...new Set(types)];
-        this.setState({ types: types });
-        this.print("Merged string", types)
+        })
+        types.unshift("All")
+        types = [...new Set(types)]
+        this.setState({ types: types })
       }
     }
 
     this.setState({
       types: types && types.length ? types : ["No categories available"],
+      products: merged && merged.length ? merged : [],
     })
-
-    this.print("Serialized DATA", merged)
   }
 
   serializePriceData(price) {
@@ -106,8 +92,63 @@ export class MaskBuilder extends Component {
     }
   }
 
+  filterProducts(typeFilter) {
+    const { products } = this.state
+    let filteredProducts = []
+    if (products && products.length) {
+      filteredProducts = products.filter(
+        product =>
+          product.type &&
+          product.type.length &&
+          product.type.includes(typeFilter)
+      )
+    }
+    this.setState({
+      filteredProducts:
+        filteredProducts && filteredProducts.length 
+          ? filteredProducts
+          : [],
+      currentType: typeFilter,
+    });
+    console.log("State after filter", this.state);
+  }
+
+  setType(value) {
+    this.filterProducts(value)
+  }
+
   render() {
-    const { wired, types, currentType } = this.state
+    const { wired, types, currentType, products, filteredProducts } = this.state
+    let ProductItemRender
+    if (filteredProducts && filteredProducts.length) {
+      ProductItemRender = filteredProducts.map((product, idx) => {
+        return (
+          <MaskProduct
+            id={product.id || undefined}
+            name={product.name || undefined}
+            image={product.image || undefined}
+            price={product.price || undefined}
+            type={product.type || undefined}
+            key={product.id || idx}
+          ></MaskProduct>
+        )
+      })
+    } else if (products && products.length) {
+      ProductItemRender = products.map((product, idx) => {
+        return (
+          <MaskProduct
+            id={product.id || undefined}
+            name={product.name || undefined}
+            image={product.image || undefined}
+            price={product.price || undefined}
+            type={product.type || undefined}
+            key={product.id || idx}
+          ></MaskProduct>
+        )
+      })
+    } else {
+      ProductItemRender = <p>Nothing to show here..</p>
+    }
     return (
       <section className="mask-builder">
         <p className="mask-builder__tip">
@@ -122,9 +163,8 @@ export class MaskBuilder extends Component {
           <em>2. Select mask design</em>
         </p>
         <div className="mask-builder__designer">
-          {/* here it goes  */}
           <div className="mask-builder__designer--header">
-            { currentType ? currentType : 'Select a type' }
+            {currentType ? currentType : "Select a type"}
             <Dropdown
               as={ButtonGroup}
               id="dropdown-item-button"
@@ -142,7 +182,13 @@ export class MaskBuilder extends Component {
               <Dropdown.Menu className="categories-dropdown__menu">
                 {types.map(types => {
                   return (
-                    <Dropdown.Item as="button" key={types}>
+                    <Dropdown.Item
+                      className="categories-dropdown__menu--items"
+                      as="button"
+                      key={types}
+                      value={types}
+                      onClick={e => this.setType(e.target.value)}
+                    >
                       {types}
                     </Dropdown.Item>
                   )
@@ -151,7 +197,7 @@ export class MaskBuilder extends Component {
             </Dropdown>
           </div>
           <div className="mask-builder__designer--content">
-
+            {ProductItemRender}
           </div>
         </div>
       </section>
