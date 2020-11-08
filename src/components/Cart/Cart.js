@@ -9,6 +9,11 @@ import ButtonToolbar from "react-bootstrap/ButtonToolbar"
 import Spinner from "react-bootstrap/Spinner"
 import Modal from "react-bootstrap/Modal"
 
+const formatPrice = (price, quantity = 1) => {
+  const priceFloat = (price/100).toFixed(2)
+  return Intl.NumberFormat('en-US', { style: 'currency', currency: 'usd'}).format(priceFloat * quantity);
+}
+
 const Cart = () => {
   const [loading, setLoading] = useState(false)
   const [editing, setEditing] = useState(false)
@@ -45,7 +50,7 @@ const Cart = () => {
             </button>
             <p className="cart__items--txt">
               {cartDetails[item].name} ({cartDetails[item].quantity}) -{" "}
-              {cartDetails[item].price}
+              {formatPrice(cartDetails[item].price, cartDetails[item].quantity)}
             </p>
           </div>
           <div>
