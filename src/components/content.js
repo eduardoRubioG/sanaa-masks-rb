@@ -18,3 +18,5 @@ export const stepData = {
 export const socialMediaHandles = {
   instagram: 'https://www.instagram.com/masksbysanaa_/'
 }
+
+export const wiredAdditionalCost = 300; // divide by 100 for dollar value 

@@ -16,6 +16,7 @@ export class MaskBuilder extends Component {
       currentType: "Select a type",
       products: [],
       filteredProducts: [],
+      wiredSku: {},
     }
     this.handleWiredSelection = this.handleWiredSelection.bind(this)
     this.handleNotWiredSelection = this.handleNotWiredSelection.bind(this)
@@ -35,16 +36,21 @@ export class MaskBuilder extends Component {
 
   /* Data processing */
   serializeData(priceData, productData) {
-    const serializedPrices = priceData.map(price =>
-      this.serializePriceData(price)
-    )
-    const serializedProducts = productData.map(product =>
-      this.serializeProductData(product)
-    )
+    const serializedPrices = priceData
+      .map(price => this.serializePriceData(price))
+      .filter(data => Boolean(data))
+    const serializedProducts = productData
+      .map(product => this.serializeProductData(product))
+      .filter(data => Boolean(data))
+    this.setWiredData(priceData)
     let merged = []
     let types = []
     if (serializedPrices.length && serializedProducts.length) {
-      for (let i = 0; i < serializedPrices.length; i++) {
+      for (
+        let i = 0;
+        i < serializedPrices.length && i < serializedProducts.length;
+        i++
+      ) {
         merged.push({
           ...serializedProducts[i],
           ...serializedPrices.find(
@@ -70,26 +76,45 @@ export class MaskBuilder extends Component {
     })
   }
 
+  setWiredData(prices) {
+    const wiredSku =
+      prices &&
+      prices.length &&
+      prices.filter(
+        price =>
+          price.node.product.name === "Wired" ||
+          price.node.product.name === "wired"
+      )
+    this.setState({ wiredSku: wiredSku[0].node ? wiredSku[0].node : undefined });
+  }
+
   serializePriceData(price) {
-    return {
-      id: price.node.id || undefined,
-      name: price.node.product.name || undefined,
-      type: price.node.product.metadata.type
-        ? price.node.product.metadata.type.split(",").map(item => item.trim())
-        : undefined,
-      price: price.node.unit_amount || undefined,
-    }
+    return price.node.product.name === "Wired" ||
+      price.node.product.name === "wired"
+      ? undefined
+      : {
+          id: price.node.id || undefined,
+          name: price.node.product.name || undefined,
+          type: price.node.product.metadata.type
+            ? price.node.product.metadata.type
+                .split(",")
+                .map(item => item.trim())
+            : undefined,
+          price: price.node.unit_amount || undefined,
+        }
   }
 
   serializeProductData(product) {
-    return {
-      id: product.node.id || undefined,
-      name: product.node.name || undefined,
-      image:
-        product.node.localFiles && product.node.localFiles.length
-          ? product.node.localFiles[0].childImageSharp.fixed
-          : null,
-    }
+    return product.node.name === "Wired" || product.node.name === "wired"
+      ? undefined
+      : {
+          id: product.node.id || undefined,
+          name: product.node.name || undefined,
+          image:
+            product.node.localFiles && product.node.localFiles.length
+              ? product.node.localFiles[0].childImageSharp.fixed
+              : null,
+        }
   }
 
   filterProducts(typeFilter) {
@@ -115,7 +140,7 @@ export class MaskBuilder extends Component {
   }
 
   render() {
-    const { wired, types, currentType, products, filteredProducts } = this.state
+    const { wired, types, currentType, products, filteredProducts, wiredSku } = this.state
     let ProductItemRender
     if (filteredProducts && filteredProducts.length) {
       ProductItemRender = filteredProducts.map((product, idx) => {
@@ -127,6 +152,8 @@ export class MaskBuilder extends Component {
             price={product.price || undefined}
             type={product.type || undefined}
             key={product.id || idx}
+            wired={wired}
+            wiredSku={wiredSku}
           ></MaskProduct>
         )
       })
@@ -140,6 +167,8 @@ export class MaskBuilder extends Component {
             price={product.price || undefined}
             type={product.type || undefined}
             key={product.id || idx}
+            wired={wired}
+            wiredSku={wiredSku}
           ></MaskProduct>
         )
       })
@@ -167,7 +196,6 @@ export class MaskBuilder extends Component {
               id="dropdown-item-button"
               title="Categories"
               variant="light-orange"
-              className="test"
             >
               <Dropdown.Toggle
                 id="categories-dropdown"

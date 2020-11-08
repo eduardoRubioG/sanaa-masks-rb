@@ -60,11 +60,6 @@ const Layout = ({ children, pageInfo }) => {
                       <a className="footer-col__link-container--link" href={socialMediaHandles.instagram}>Instagram</a>
                     </div>
                   </div>
-                  {/* <span>
-                    © {new Date().getFullYear()}, Built with
-                    {` `}
-                    <a href="https://www.gatsbyjs.org">Gatsby</a>
-                  </span> */}
                 </footer>
               </Col>
             </Row>

@@ -35,3 +35,11 @@
     }
   }
 }
+
+.wired-card {
+  margin: auto 0;
+  &__info {
+    font-weight: 200;
+    font-size: .8rem;
+  }
+}

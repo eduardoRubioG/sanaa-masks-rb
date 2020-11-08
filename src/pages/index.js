@@ -13,13 +13,12 @@ import Cart from "../components/Cart/Cart"
 import SEO from "../components/seo"
 
 const stripePromise = loadStripe(process.env.STRIPE_PUB_KEY)
-// const stripePromise = loadStripe('pk_test_51HjBs5Dj5VI0xmgcMQtuC981DUXeEMWRj4UWkLqXTVH7SZtN6J7oLxfKJGT2HaCxg6QS2ktHPpoafxvM5bqp64Cf00ipVRhpN9');
 const IndexPage = ({ data }) => (
   <CartProvider
     mode="client-only"
     stripe={stripePromise}
     successUrl={`${process.env.ROOT_URL}/success`}
-    cancelUrl={`${process.env.ROOT_URL}/cancel`}
+    cancelUrl={`${process.env.ROOT_URL}/#`}
     currency="USD"
     allowedCountries={["US"]}
     billingAddressCollection={true}
@@ -31,12 +30,10 @@ const IndexPage = ({ data }) => (
         <Hero />
       </section>
 
-      {/* <section id="about-section"> */}
-      <section >
+      <section>
         <About />
       </section>
-
-      {/* <section id="mask-section"> */}
+      
       <section>
         <MaskSection
           id="mask-section"
