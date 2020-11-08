@@ -110,7 +110,6 @@ export class MaskBuilder extends Component {
           : [],
       currentType: typeFilter,
     });
-    console.log("State after filter", this.state);
   }
 
   setType(value) {

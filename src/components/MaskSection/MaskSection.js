@@ -11,7 +11,6 @@ export default class MaskSection extends Component {
     this.state = {
       orders: []
     }
-    console.log("props in section", props);
   }
   render() {
     return (
