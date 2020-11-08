@@ -25,7 +25,9 @@ const IndexPage = ({ data }) => (
   >
     <Layout pageInfo={{ pageName: "index" }}>
       <SEO title="Home" keywords={[`gatsby`, `react`, `bootstrap`]} />
-
+  <h1>{process.env.STRIPE_PUB_KEY}</h1>
+  <h1>{process.env.STRIPE_SECRET_KEY}</h1>
+  <h1>{process.env.ROOT_URL}</h1>
       <section id="hero-section">
         <Hero />
       </section>
