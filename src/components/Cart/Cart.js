@@ -7,10 +7,12 @@ import Button from "react-bootstrap/Button"
 import ButtonGroup from "react-bootstrap/ButtonGroup"
 import ButtonToolbar from "react-bootstrap/ButtonToolbar"
 import Spinner from "react-bootstrap/Spinner"
+import Modal from "react-bootstrap/Modal"
 
 const Cart = () => {
   const [loading, setLoading] = useState(false)
   const [editing, setEditing] = useState(false)
+  const [tryingToClearCart, setTryingToClearCart] = useState(false)
   /* Gets the totalPrice and a method for redirecting to stripe */
   const {
     formattedTotalPrice,
@@ -20,7 +22,7 @@ const Cart = () => {
     cartDetails,
     removeItem,
     incrementItem,
-    decrementItem
+    decrementItem,
   } = useShoppingCart()
   let CartItemizedList
   if (cartDetails && Object.keys(cartDetails)) {
@@ -52,7 +54,7 @@ const Cart = () => {
                 <Button
                   variant="outline-light"
                   size="sm"
-                  key='subtractItem'
+                  key="subtractItem"
                   className={btnGroupClass}
                   onClick={() => decrementItem(cartDetails[item].sku)}
                 >
@@ -61,7 +63,7 @@ const Cart = () => {
                 <Button
                   variant="outline-light"
                   size="sm"
-                  key='addItem'
+                  key="addItem"
                   className={btnGroupClass}
                   onClick={() => incrementItem(cartDetails[item].sku)}
                 >
@@ -75,7 +77,7 @@ const Cart = () => {
     })
   }
   return (
-    <div className={`cart ${cartCount <= 0 ? 'empty' : ''}`}>
+    <div className={`cart ${cartCount <= 0 ? "empty" : ""}`}>
       {/* This is where we'll render our cart */}
       <div className="cart__summary--header">
         <p>
@@ -96,7 +98,7 @@ const Cart = () => {
       <div className="cart__footer">
         <Button
           variant="outline-light"
-          onClick={clearCart}
+          onClick={() => setTryingToClearCart(true)}
           className="cart__footer--btn clear"
         >
           Clear cart
@@ -117,6 +119,41 @@ const Cart = () => {
           )}
         </Button>
       </div>
+
+      {/* Modals */}
+      <Modal
+        show={tryingToClearCart}
+        onHide={() => setTryingToClearCart(false)}
+        centered
+        dialogClassName="modal"
+      >
+        <Modal.Header closeButton className="modal--theme">
+          <Modal.Title>Do you want to empty your cart?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modal--theme">
+          If you clear your cart, you will be unable to restore your selected
+          products
+        </Modal.Body>
+        <Modal.Footer className="modal--theme">
+          <Button
+            variant="light-orange"
+            className="modal__btn--cancel"
+            onClick={() => setTryingToClearCart(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="outline-dark"
+            className="modal__btn--clear"
+            onClick={() => {
+              setTryingToClearCart(false);
+              clearCart();
+            }}
+          >
+            Clear cart
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }
