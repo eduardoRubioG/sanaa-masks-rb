@@ -12,22 +12,19 @@ import Cart from "../components/Cart/Cart"
 
 import SEO from "../components/seo"
 
-const stripePromise = loadStripe(process.env.STRIPE_PUB_KEY)
+const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUB_KEY)
 const IndexPage = ({ data }) => (
   <CartProvider
     mode="client-only"
     stripe={stripePromise}
-    successUrl={`${process.env.ROOT_URL}/success`}
-    cancelUrl={`${process.env.ROOT_URL}/#`}
+    successUrl={`${process.env.GATSBY_ROOT_URL}/success`}
+    cancelUrl={`${process.env.GATSBY_ROOT_URL}/#`}
     currency="USD"
     allowedCountries={["US"]}
     billingAddressCollection={true}
   >
     <Layout pageInfo={{ pageName: "index" }}>
       <SEO title="Home" keywords={[`gatsby`, `react`, `bootstrap`]} />
-  <h1>{process.env.STRIPE_PUB_KEY}</h1>
-  <h1>{process.env.STRIPE_SECRET_KEY}</h1>
-  <h1>{process.env.ROOT_URL}</h1>
       <section id="hero-section">
         <Hero />
       </section>
