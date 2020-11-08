@@ -22,7 +22,14 @@ export default class WireSelector extends Component {
     return (
         <div className="wire-selector">
           <div className={`wire-selector__card ${isWiredSelected}`}>
-            <button onClick={this.selectWiredOption}>Wired</button>
+            <button onClick={this.selectWiredOption}>
+            <p className="wired-card">
+              Wired
+              <span className="wired-card__info">
+                {' (+$3.00)'}
+              </span>
+            </p>
+            </button>
           </div>
           <div className={`wire-selector__card ${isNotWiredSelected}`}>
             <button onClick={this.selectNotWiredOption}>Not Wired</button>
