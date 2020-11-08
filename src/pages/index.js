@@ -28,11 +28,11 @@ const IndexPage = ({ data }) => (
       <SEO title="Home" keywords={[`gatsby`, `react`, `bootstrap`]} />
       <Hero />
       <About />
-      <Cart />
       <MaskSection
         priceData={data.allStripePrice}
         productData={data.allStripeProduct}
       />
+      <Cart />
     </Layout>
   </CartProvider>
 )

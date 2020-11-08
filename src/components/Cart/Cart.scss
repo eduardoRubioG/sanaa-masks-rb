@@ -1,0 +1,120 @@
+@import "../../styles/variables";
+.cart {
+  position: relative;
+  background-color: $light-green;
+  color: $off-white;
+  padding: 1rem;
+  font-weight: 200;
+  opacity: 1; 
+  transition: 3000ms ease-in opacity;
+
+  &.empty {
+    display: none;
+    opacity: 0;
+  }
+
+  &__summary {
+    &--header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(#eae6ce, 0.5);
+      padding: 0.2rem;
+      padding-bottom: 0.8rem;
+      & > p {
+        margin: 0.2rem 0rem;
+      }
+      &--edit {
+        border-color: $off-white;
+        color: $off-white;
+        &:hover,
+        &:focus {
+          background-color: $off-white;
+          color: $light-green;
+        }
+      }
+    }
+  }
+
+  &__items {
+    padding: 1rem;
+    &--item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &--line {
+        display: flex;
+        align-items: center;
+      }
+    }
+    &--item + &--item {
+      padding-top: 10px;
+    }
+    &--btn-group {
+      opacity: 1;
+      transform: translateX(-10);
+      border-color: $light-orange;
+      color: $light-orange;
+      transition: transform ease-out 250ms, opacity ease-out 250ms;
+      &:hover,
+      &:active {
+        background-color: $light-orange;
+        color: $off-white;
+      }
+      &.edit {
+        transform: translateX(15px);
+        opacity: 0;
+      }
+    }
+    &--btn {
+      margin-right: 0.5rem;
+      border: none;
+      background-color: rgba(red, 0.7);
+      color: $off-white;
+      border-radius: 50px;
+      width: 1rem;
+      height: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      opacity: 1;
+      transform: translateX(0);
+      transition: transform ease-out 250ms, opacity ease-out 250ms;
+
+      &--icon {
+        width: 43%;
+        height: 2px;
+        background-color: #fff;
+      }
+      &.edit {
+        opacity: 0;
+        transform: translateX(-15px);
+      }
+    }
+    &--txt {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    &--btn {
+      &.clear {
+        color: $off-white;
+        border-color: $off-white;
+        &:active, &:hover {
+          background-color: $off-white;
+          color: $dark-green;
+        }
+      }
+      &.checkout {
+        color: $off-white;
+      }
+    }
+    &--btn + &--btn {
+      margin-top: 0.5rem;
+    }
+  }
+}
