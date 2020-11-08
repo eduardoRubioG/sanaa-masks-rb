@@ -7,6 +7,7 @@
   }
 
   &__designer {
+    margin-top: 1rem;
     padding: 1rem;
     width: 100%;
     min-width: 200px;
@@ -24,6 +25,11 @@
       color: $dark-green;
       padding-bottom: 0.75rem;
       border-bottom: 2px solid rgba(#eae6ce, 0.5);
+      & > p {
+        margin: auto 0;
+        font-size: 0.85rem;
+        padding: 0 0.8rem;
+      }
     }
 
     &--content {
@@ -53,5 +59,4 @@
       color: $dark-green;
     }
   }
-
 }

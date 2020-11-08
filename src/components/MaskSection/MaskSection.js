@@ -19,7 +19,7 @@ export default class MaskSection extends Component {
           <div className="mask-section__humaans">
             <Humaans />
           </div>
-          <div className="mask-section__header">
+          <div className="mask-section__header" id="mask-section">
             <p className="mask-section__header--text">Customize your Mask</p>
             <div className="mask-section__bar" />
           </div>

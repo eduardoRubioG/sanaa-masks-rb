@@ -28,10 +28,10 @@
   }
 
   &__text {
-    color: $dark-green;
+    color: rgba($dark-green, 0.7);
     margin: 0;
     font-size: 0.7rem;
-    padding-top: 5px;
+    padding-top: 10px;
   }
 
   &__count {

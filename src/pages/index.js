@@ -31,11 +31,13 @@ const IndexPage = ({ data }) => (
         <Hero />
       </section>
 
-      <section id="about-section">
+      {/* <section id="about-section"> */}
+      <section >
         <About />
       </section>
 
-      <section id="mask-section">
+      {/* <section id="mask-section"> */}
+      <section>
         <MaskSection
           id="mask-section"
           priceData={data.allStripePrice}

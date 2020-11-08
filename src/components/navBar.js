@@ -7,7 +7,7 @@ import Nav from "react-bootstrap/Nav"
 import "./navBar.scss"
 
 const CustomNavbar = ({ pageInfo }) => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false)
   return (
     <>
       <Navbar
@@ -18,12 +18,20 @@ const CustomNavbar = ({ pageInfo }) => {
         fixed="top"
         expanded={expanded}
       >
+        {/* <Container> */}
         <Link to="/" className="link-no-style">
-          <Navbar.Brand as="span" style={{ color: `#FEFAE0`}}>Masks by Sanaa</Navbar.Brand>
+          <Navbar.Brand as="span">
+            <span className="navbar__brand-text">
+              <span className="navbar__brand-text--emph">Masks</span> by Sanaa
+            </span>
+          </Navbar.Brand>
         </Link>
 
         {/* The hamburger menu  */}
-        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")}/>
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          onClick={() => setExpanded(expanded ? false : "expanded")}
+        />
 
         {/* The drop down link menu on mobile  */}
         <Navbar.Collapse id="basic-navbar-nav">
@@ -33,17 +41,59 @@ const CustomNavbar = ({ pageInfo }) => {
             activeKey={pageInfo && pageInfo.pageName}
             defaultActiveKey="/buy"
           >
-              <Nav.Link href="#hero-section" eventKey="home" style={{ fontWeight: `300`}} onClick={() => setExpanded(false)}>
+            <Link
+              to="/#"
+              className="link-no-style"
+              style={{ marginRight: `1rem` }}
+              onClick={() =>
+                setTimeout(() => {
+                  setExpanded(false)
+                }, 150)
+              }
+            >
+              <Nav.Link as="span" eventKey="buy" style={{ fontWeight: `300` }}>
                 HOME
               </Nav.Link>
-              <Nav.Link href="#about-section" eventKey="about" style={{ fontWeight: `300`}} onClick={() => setExpanded(false)}>
+            </Link>
+            <Link
+              to="/#about-section"
+              className="link-no-style"
+              style={{ marginRight: `1rem` }}
+              onClick={() =>
+                setTimeout(() => {
+                  setExpanded(false)
+                }, 150)
+              }
+            >
+              <Nav.Link
+                as="span"
+                eventKey="about"
+                style={{ fontWeight: `300` }}
+              >
                 ABOUT
               </Nav.Link>
-              <Nav.Link href="#mask-section" eventKey="buy" style={{ fontWeight: `300`}} onClick={() => setExpanded(false)}>
+            </Link>
+            <Link
+              to="/#mask-section"
+              className="link-no-style"
+              style={{ marginRight: `1rem` }}
+              onClick={() =>
+                setTimeout(() => {
+                  setExpanded(false)
+                }, 150)
+              }
+            >
+              <Nav.Link
+                as="span"
+                eventKey="about"
+                style={{ fontWeight: `300` }}
+              >
                 BUY MASK
               </Nav.Link>
+            </Link>
           </Nav>
         </Navbar.Collapse>
+        {/* </Container> */}
       </Navbar>
     </>
   )
