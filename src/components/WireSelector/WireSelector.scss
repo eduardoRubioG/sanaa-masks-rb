@@ -2,10 +2,11 @@
 .wire-selector {
   display: flex;
   justify-content: space-between;
+  margin: 0 auto;
+  margin-top: 1rem;
   margin-bottom: 2rem;
-  // border: 1px solid red;
+  max-width: 290px;
   &__card {
-    // border: 1px solid blue;
     width: 8rem;
     height: 8rem;
 

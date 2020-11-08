@@ -48,9 +48,9 @@ export default function Hero() {
       <Img fluid={data.allFile.nodes[0].childImageSharp.fluid} />
 
       {/* No. 3 */}
-      <div className="hero__btn-bar">
-        <Button variant="outline-dark">Learn more</Button>
-        <Button variant="dark-orange">Buy Mask</Button>
+      <div className="hero__btn-bar" id="about-section">
+        <Button variant="outline-dark" href="#about-section">Learn more</Button>
+        <Button variant="dark-orange" href="#mask-section">Buy Mask</Button>
       </div>
 
       {/* No. 4 */}

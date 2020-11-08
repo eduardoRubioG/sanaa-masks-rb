@@ -1,6 +1,7 @@
 @import './variables';
 html {
   background-color: $off-white; 
+  scroll-behavior: smooth;
 }
 div.main {
   min-height: 100vh;
@@ -37,6 +38,32 @@ a.link-no-style {
     span {
       align-self: center;
       text-align: center;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    &-emph, & > p {
+      font-size: 1rem;
+      font-weight: 200;
+      margin: 0;
+    }
+    &-emph {
+      font-weight: 400;
+    }
+  }
+
+  &__link-container {
+    font-weight: 200;
+      font-size: 0.8rem;
+    &--link {
+      color: $off-white;
+      &:hover {
+        color: $light-orange;
+      }
     }
   }
 }

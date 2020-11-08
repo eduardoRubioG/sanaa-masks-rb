@@ -105,11 +105,9 @@ export class MaskBuilder extends Component {
     }
     this.setState({
       filteredProducts:
-        filteredProducts && filteredProducts.length 
-          ? filteredProducts
-          : [],
+        filteredProducts && filteredProducts.length ? filteredProducts : [],
       currentType: typeFilter,
-    });
+    })
   }
 
   setType(value) {
@@ -163,7 +161,7 @@ export class MaskBuilder extends Component {
         </p>
         <div className="mask-builder__designer">
           <div className="mask-builder__designer--header">
-            {currentType ? currentType : "Select a type"}
+            <p>{currentType ? currentType : "Select a type"}</p>
             <Dropdown
               as={ButtonGroup}
               id="dropdown-item-button"
