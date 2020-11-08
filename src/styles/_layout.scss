@@ -1,6 +1,7 @@
 @import './variables';
 html {
   background-color: $off-white; 
+  scroll-behavior: smooth;
 }
 div.main {
   min-height: 100vh;
