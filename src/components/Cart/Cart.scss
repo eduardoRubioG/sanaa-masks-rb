@@ -118,3 +118,20 @@
     }
   }
 }
+
+.modal {
+  color: $dark-green;
+  font-weight: 300;
+  &--theme {
+    background-color: $off-white;
+  }
+  &__btn {
+    &--clear {}
+    &--cancel {
+      color: $off-white;
+      &:focus, &:hover {
+        color: $off-white;
+      }
+    }
+  }
+}
