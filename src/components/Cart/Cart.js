@@ -161,6 +161,7 @@ const Cart = () => {
             onClick={() => {
               setTryingToClearCart(false);
               clearCart();
+              setEmptyCart('cart empty');
             }}
           >
             Clear cart
