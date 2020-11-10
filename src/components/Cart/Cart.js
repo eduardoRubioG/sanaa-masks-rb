@@ -30,6 +30,7 @@ const Cart = () => {
     decrementItem,
   } = useShoppingCart()
   let CartItemizedList
+  const cartClass = (cartCount <= 0) ? 'cart empty' : 'cart';
   if (cartDetails && Object.keys(cartDetails)) {
     CartItemizedList = Object.keys(cartDetails).map(item => {
       const btnClass = editing ? "cart__items--btn" : "cart__items--btn edit"
@@ -82,7 +83,7 @@ const Cart = () => {
     })
   }
   return (
-    <div className={`cart ${cartCount <= 0 ? "empty" : ""}`}>
+    <div className={cartClass}>
       {/* This is where we'll render our cart */}
       <div className="cart__summary--header">
         <p>
