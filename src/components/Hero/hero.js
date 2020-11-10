@@ -27,30 +27,40 @@ export default function Hero() {
   `)
   return (
     <div className="hero__container">
-      
-      {/* No. 1 */}
-      <div className="hero__text-content">
-        <h2 className="hero__header--lg">
-          Do good,
-          <br />
-          Look good.
-        </h2>
+      <div className="hero__container--lg">
+        <div className="hero__container--lg-text">
+          {/* No. 1 */}
+          <div className="hero__text-content">
+            <div className="hero__header--lg">
+              <h2>Do good,</h2>
+              <h2>Look good.</h2>
+            </div>
 
-        <h2 className="hero__header--sm">Do good, Look good.</h2>
+            <h2 className="hero__header--sm">Do good, Look good.</h2>
 
-        <p className="hero__subtitle">
-          Stylish cloth masks to protect your community while supporting them
-          too
-        </p>
-      </div>
+            <p className="hero__subtitle">
+              Stylish cloth masks to protect your community while supporting
+              them too
+            </p>
+          </div>
 
-      {/* No. 2 */}
-      <Img fluid={data.allFile.nodes[0].childImageSharp.fluid} />
+          <div className="hero__btn-bar" id="about-section">
+            <Button variant="outline-dark" href="#about-section">
+              Learn more
+            </Button>
+            <Button variant="dark-orange" href="#mask-section">
+              Buy Mask
+            </Button>
+          </div>
+        </div>
 
-      {/* No. 3 */}
-      <div className="hero__btn-bar" id="about-section">
-        <Button variant="outline-dark" href="#about-section">Learn more</Button>
-        <Button variant="dark-orange" href="#mask-section">Buy Mask</Button>
+        {/* No. 2 */}
+        <div className="hero__img">
+          <div className="hero__img-backdrop" />
+          <Img
+            fluid={data.allFile.nodes[0].childImageSharp.fluid}
+          />
+        </div>
       </div>
 
       {/* No. 4 */}
