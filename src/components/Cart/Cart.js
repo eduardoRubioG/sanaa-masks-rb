@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useShoppingCart } from "use-shopping-cart"
 import "./Cart.scss"
 
@@ -17,6 +17,7 @@ const formatPrice = (price, quantity = 1) => {
 const Cart = () => {
   const [loading, setLoading] = useState(false)
   const [editing, setEditing] = useState(false)
+  const [emptyCart, setEmptyCart] = useState(true)
   const [tryingToClearCart, setTryingToClearCart] = useState(false)
   /* Gets the totalPrice and a method for redirecting to stripe */
   const {
@@ -30,7 +31,15 @@ const Cart = () => {
     decrementItem,
   } = useShoppingCart()
   let CartItemizedList
-  const cartClass = (cartCount <= 0) ? 'cart empty' : 'cart';
+  let cartClass
+
+  useEffect(() => {
+    if(cartCount > 0) {
+      setEmptyCart(false)
+    }
+    cartClass = (emptyCart === true) ? 'cart empty' : 'cart';
+  });
+
   if (cartDetails && Object.keys(cartDetails)) {
     CartItemizedList = Object.keys(cartDetails).map(item => {
       const btnClass = editing ? "cart__items--btn" : "cart__items--btn edit"
