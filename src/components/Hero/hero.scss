@@ -1,19 +1,23 @@
+@import '../../styles/variables';
 .hero {
   &__container {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 116px);
-    background: #FEFAE0;
+    background: $off-white;
 
-    & :nth-child(1) { order: 2; }
-    & :nth-child(2) { order: 1; }
-    & :nth-child(3) { order: 3; }
-    & :nth-child(4) { order: 4; }
+    &--lg {
+      display: grid; 
+      grid-template-rows: 2fr;
+      grid-template-columns: 1fr;
+      &-text {
+        grid-row: 2 / -1;
+      }
+    }
   }
 
   &__text-content {
-    padding: .5rem 0;
-    color: #283618;
+    padding: 0.5rem 0;
+    color: $dark-green;
     & > h2 {
       text-align: center;
       font-weight: 200;
@@ -28,7 +32,7 @@
       display: none;
     }
     &--sm {
-      /* hello there */ 
+      /* hello there */
     }
   }
 
@@ -36,19 +40,82 @@
     padding: 1rem;
     padding-top: 0.25rem;
     text-align: center;
-    // margin: auto 0;
   }
 
   &__btn-bar {
     display: flex;
     justify-content: space-around;
-    margin: 0 auto; 
+    margin: 0 auto;
     padding-bottom: 1.5rem;
     width: 70%;
     max-width: 275px;
   }
 
-  &__wave { 
+  &__wave {
     margin-top: auto;
+  }
+}
+
+// desktop
+@media only screen and (min-width: 650px) {
+  .hero {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    &__header {
+      &--lg {
+        display: inherit;
+        padding: 1rem;
+        & > h2 {
+          font-weight: 200;
+        }
+      }
+      &--sm {
+        display: none;
+      }
+    }
+    &__subtitle {
+      text-align: left;
+      padding: 0 1rem;
+    }
+    &__btn-bar {
+      margin: 0;
+    }
+    &__img {
+      position: relative;
+      padding:  2rem 1rem;
+      height: 100%;
+      width: 100%;
+      z-index: 99;
+      max-width:650px;
+      max-height:650px;
+      &-backdrop {
+        position: absolute;
+        background-color: $dark-green;
+        width: 95%;
+        height: 90%;
+        top: 25px;
+        left: 8px;
+      }
+    }
+    &__container {
+      position: relative;
+      height: 95vh;
+      &--lg {
+        display: flex;
+        padding: 2rem;
+        &-text {
+          padding: 3rem;
+          width: 50%;
+          margin: auto 0;
+        }
+      }
+    }
+
+    &__wave {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
   }
 }
