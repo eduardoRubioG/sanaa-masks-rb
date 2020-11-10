@@ -17,7 +17,7 @@ const formatPrice = (price, quantity = 1) => {
 const Cart = () => {
   const [loading, setLoading] = useState(false)
   const [editing, setEditing] = useState(false)
-  const [emptyCart, setEmptyCart] = useState(true)
+  const [emptyCart, setEmptyCart] = useState('cart empty')
   const [tryingToClearCart, setTryingToClearCart] = useState(false)
   /* Gets the totalPrice and a method for redirecting to stripe */
   const {
@@ -31,13 +31,11 @@ const Cart = () => {
     decrementItem,
   } = useShoppingCart()
   let CartItemizedList
-  let cartClass
 
   useEffect(() => {
     if(cartCount > 0) {
-      setEmptyCart(false)
+      setEmptyCart('cart')
     }
-    cartClass = (emptyCart === true) ? 'cart empty' : 'cart';
   });
 
   if (cartDetails && Object.keys(cartDetails)) {
@@ -92,7 +90,7 @@ const Cart = () => {
     })
   }
   return (
-    <div className={cartClass}>
+    <div className={emptyCart}>
       {/* This is where we'll render our cart */}
       <div className="cart__summary--header">
         <p>
