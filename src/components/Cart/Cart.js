@@ -10,14 +10,17 @@ import Spinner from "react-bootstrap/Spinner"
 import Modal from "react-bootstrap/Modal"
 
 const formatPrice = (price, quantity = 1) => {
-  const priceFloat = (price/100).toFixed(2)
-  return Intl.NumberFormat('en-US', { style: 'currency', currency: 'usd'}).format(priceFloat * quantity);
+  const priceFloat = (price / 100).toFixed(2)
+  return Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "usd",
+  }).format(priceFloat * quantity)
 }
 
 const Cart = () => {
   const [loading, setLoading] = useState(false)
   const [editing, setEditing] = useState(false)
-  const [emptyCart, setEmptyCart] = useState('cart empty')
+  const [emptyCart, setEmptyCart] = useState("cart empty")
   const [tryingToClearCart, setTryingToClearCart] = useState(false)
   /* Gets the totalPrice and a method for redirecting to stripe */
   const {
@@ -33,10 +36,10 @@ const Cart = () => {
   let CartItemizedList
 
   useEffect(() => {
-    if(cartCount > 0) {
-      setEmptyCart('cart')
+    if (cartCount > 0) {
+      setEmptyCart("cart")
     }
-  });
+  })
 
   if (cartDetails && Object.keys(cartDetails)) {
     CartItemizedList = Object.keys(cartDetails).map(item => {
@@ -66,7 +69,7 @@ const Cart = () => {
               <ButtonGroup>
                 <Button
                   variant="outline-light"
-                  size="sm"
+                  size="md"
                   key="subtractItem"
                   className={btnGroupClass}
                   onClick={() => decrementItem(cartDetails[item].sku)}
@@ -75,7 +78,7 @@ const Cart = () => {
                 </Button>
                 <Button
                   variant="outline-light"
-                  size="sm"
+                  size="md"
                   key="addItem"
                   className={btnGroupClass}
                   onClick={() => incrementItem(cartDetails[item].sku)}
@@ -90,85 +93,87 @@ const Cart = () => {
     })
   }
   return (
-    <div className={emptyCart}>
-      {/* This is where we'll render our cart */}
-      <div className="cart__summary--header">
-        <p>
-          Number of Items:{" "}
-          <span className="cart__summary--header-txt">{cartCount}</span>
-        </p>
-        <Button
-          variant="outline-light"
-          size="sm"
-          className="cart__summary--header--edit"
-          onClick={() => setEditing(!editing)}
-        >
-          {editing ? "Done" : "Edit"}
-        </Button>
-      </div>
-      <div className="cart__items">{CartItemizedList}</div>
-      <p>Total: {formattedTotalPrice}</p>
-      <div className="cart__footer">
-        <Button
-          variant="outline-light"
-          onClick={() => setTryingToClearCart(true)}
-          className="cart__footer--btn clear"
-        >
-          Clear cart
-        </Button>
-        <Button
-          variant="light-orange"
-          className="cart__footer--btn checkout"
-          disabled={loading}
-          onClick={() => {
-            setLoading(true)
-            redirectToCheckout()
-          }}
-        >
-          {loading ? (
-            <Spinner as="span" size="sm" animation="grow" />
-          ) : (
-            "Checkout"
-          )}
-        </Button>
-      </div>
-
-      {/* Modals */}
-      <Modal
-        show={tryingToClearCart}
-        onHide={() => setTryingToClearCart(false)}
-        centered
-        dialogClassName="modal"
-      >
-        <Modal.Header closeButton className="modal--theme">
-          <Modal.Title>Do you want to empty your cart?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="modal--theme">
-          If you clear your cart, you will be unable to restore your selected
-          products
-        </Modal.Body>
-        <Modal.Footer className="modal--theme">
+    <section className="cart__container">
+      <div className={emptyCart}>
+        {/* This is where we'll render our cart */}
+        <div className="cart__summary--header">
+          <p>
+            Number of Items:{" "}
+            <span className="cart__summary--header-txt">{cartCount}</span>
+          </p>
           <Button
-            variant="light-orange"
-            className="modal__btn--cancel"
-            onClick={() => setTryingToClearCart(false)}
+            variant="outline-light"
+            size="sm"
+            className="cart__summary--header--edit"
+            onClick={() => setEditing(!editing)}
           >
-            Cancel
+            {editing ? "Done" : "Edit"}
           </Button>
+        </div>
+        <div className="cart__items">{CartItemizedList}</div>
+        <p>Total: {formattedTotalPrice}</p>
+        <div className="cart__footer">
           <Button
-            variant="outline-dark"
-            className="modal__btn--clear"
-            onClick={() => {
-              setTryingToClearCart(false);
-              clearCart();
-              setEmptyCart('cart empty');
-            }}
+            variant="outline-light"
+            onClick={() => setTryingToClearCart(true)}
+            className="cart__footer--btn clear"
           >
             Clear cart
           </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+          <Button
+            variant="light-orange"
+            className="cart__footer--btn checkout"
+            disabled={loading}
+            onClick={() => {
+              setLoading(true)
+              redirectToCheckout()
+            }}
+          >
+            {loading ? (
+              <Spinner as="span" size="sm" animation="grow" />
+            ) : (
+              "Checkout"
+            )}
+          </Button>
+        </div>
+
+        {/* Modals */}
+        <Modal
+          show={tryingToClearCart}
+          onHide={() => setTryingToClearCart(false)}
+          centered
+          dialogClassName="modal"
+        >
+          <Modal.Header closeButton className="modal--theme">
+            <Modal.Title>Do you want to empty your cart?</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="modal--theme">
+            If you clear your cart, you will be unable to restore your selected
+            products
+          </Modal.Body>
+          <Modal.Footer className="modal--theme">
+            <Button
+              variant="light-orange"
+              className="modal__btn--cancel"
+              onClick={() => setTryingToClearCart(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="outline-dark"
+              className="modal__btn--clear"
+              onClick={() => {
+                setTryingToClearCart(false)
+                clearCart()
+                setEmptyCart("cart empty")
+              }}
+            >
+              Clear cart
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    </section>
   )
 }
 

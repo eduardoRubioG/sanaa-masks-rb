@@ -37,9 +37,8 @@
       overflow: auto;
       max-height: 320px;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 0.25rem;
-      grid-auto-rows: minmax(100px, auto);
+      grid-gap: 5px;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
   }
 }

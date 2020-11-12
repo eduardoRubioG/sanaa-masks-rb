@@ -30,13 +30,13 @@
   &__text {
     color: rgba($dark-green, 0.7);
     margin: 0;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     padding-top: 10px;
   }
 
   &__count {
     position: relative;
-    margin-left: 50%;
+    margin-left: 35%;
     transform: translateY(1rem);
     z-index: 1;
     color: $off-white;
@@ -50,6 +50,14 @@
     border-radius: 20px;
     &.inactive {
       opacity: 0;
+    }
+  }
+}
+
+@media only screen and (min-width: 830px) {
+  .mask-product {
+    &__count {
+      margin-left: 25%;
     }
   }
 }
