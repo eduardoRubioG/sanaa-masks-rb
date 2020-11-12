@@ -31,7 +31,9 @@ const SecondPage = () => {
   return (
     <Layout pageInfo={{ pageName: "success" }}>
       <div className="success">
-        <Img fluid={data.allFile.nodes[0].childImageSharp.fluid} />
+        <div className="success__img-container">
+          <Img className="success__img" fluid={data.allFile.nodes[0].childImageSharp.fluid} />
+        </div>
         <div className="success__msg">
           <p>Your masks will be mailed shortly!</p>
         </div>
