@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { useShoppingCart, formatCurrencyString } from "use-shopping-cart"
-import { wiredAdditionalCost } from "../content";
 import Img from "gatsby-image"
 import "./MaskProduct.scss"
 
@@ -39,7 +38,7 @@ function MaskProduct(props) {
       productsInCart.filter(product => product === id)
     const cartProduct = cartDetails[productCartId];
     cartProduct && cartProduct.quantity ? setCount(cartProduct.quantity) : setCount(0);
-  }, [cartDetails])
+  }, [cartDetails, id])
 
   return (
     <button

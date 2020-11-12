@@ -1,14 +1,19 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useStaticQuery } from "gatsby"
-import Button from "react-bootstrap/Button"
 import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import "../styles/success.scss"
-import SEO from "../components/seo"
+import { useShoppingCart } from "use-shopping-cart";
 
 // Might need to clear the cart here in this page
 const SecondPage = () => {
+  const { clearCart } = useShoppingCart(); 
+  useEffect(() => {
+    clearCart();
+    sessionStorage.clear('cart-values');
+    localStorage.clear('cart-values');
+  },[clearCart]);
   const data = useStaticQuery(graphql`
   query SuccessQuery {
     allFile(

@@ -3,8 +3,8 @@ import "./About.scss"
 
 // Components
 import NumberIcon from "../NumberIcon/NumberIcon"
-import DonationCounter from "../DonationCounter/DonationCounter"
 import { aboutTheOwnerText, stepData } from "../content"
+// import DonationCounter from "../DonationCounter/DonationCounter"
 
 export default function About() {
   return (

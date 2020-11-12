@@ -22,6 +22,8 @@ const Cart = () => {
   const [editing, setEditing] = useState(false)
   const [emptyCart, setEmptyCart] = useState("cart empty")
   const [tryingToClearCart, setTryingToClearCart] = useState(false)
+  const [tryingToDeleteItem, setTryingToDeleteItem] = useState(false)
+  const [selectedItem, setSelectedItem] = useState('');
   /* Gets the totalPrice and a method for redirecting to stripe */
   const {
     formattedTotalPrice,
@@ -39,7 +41,7 @@ const Cart = () => {
     if (cartCount > 0) {
       setEmptyCart("cart")
     }
-  })
+  }, [cartCount]);
 
   if (cartDetails && Object.keys(cartDetails)) {
     CartItemizedList = Object.keys(cartDetails).map(item => {
@@ -53,8 +55,8 @@ const Cart = () => {
             <button
               className={btnClass}
               onClick={() => {
-                removeItem(cartDetails[item].sku)
-                setEditing(false)
+                setSelectedItem(cartDetails[item].sku)
+                setTryingToDeleteItem(true)
               }}
             >
               <div className="cart__items--btn--icon" />
@@ -169,6 +171,41 @@ const Cart = () => {
               }}
             >
               Clear cart
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        {/* Are yu sure you want to delete this item modal */}
+        <Modal
+          show={tryingToDeleteItem}
+          onHide={() => setTryingToDeleteItem(false)}
+          centered
+          dialogClassName="modal"
+        >
+          <Modal.Header closeButton className="modal--theme">
+            <Modal.Title>Do you want to remove this item from the cart?</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="modal--theme">
+            If you remove this item, you'll have to add it again if you change your mind!
+          </Modal.Body>
+          <Modal.Footer className="modal--theme">
+            <Button
+              variant="light-orange"
+              className="modal__btn--cancel"
+              onClick={() => setTryingToDeleteItem(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="outline-dark"
+              className="modal__btn--clear"
+              onClick={() => {
+                removeItem(selectedItem)
+                setTryingToDeleteItem(false)
+                setEditing(false)
+              }}
+            >
+              Remove Item
             </Button>
           </Modal.Footer>
         </Modal>
