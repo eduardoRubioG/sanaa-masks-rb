@@ -51,7 +51,7 @@ const CustomNavbar = ({ pageInfo }) => {
                 }, 150)
               }
             >
-              <Nav.Link as="span" eventKey="buy" style={{ fontWeight: `300` }}>
+              <Nav.Link as="span" eventKey="buy" style={{ fontWeight: `300`, fontSize: `0.85rem` }}>
                 HOME
               </Nav.Link>
             </Link>
@@ -68,7 +68,7 @@ const CustomNavbar = ({ pageInfo }) => {
               <Nav.Link
                 as="span"
                 eventKey="about"
-                style={{ fontWeight: `300` }}
+                style={{ fontWeight: `300`, fontSize: `0.85rem` }}
               >
                 ABOUT
               </Nav.Link>
@@ -86,7 +86,8 @@ const CustomNavbar = ({ pageInfo }) => {
               <Nav.Link
                 as="span"
                 eventKey="about"
-                style={{ fontWeight: `300` }}
+                style={{ fontWeight: `300`, fontSize: `0.85rem` }}
+                id="buy-button"
               >
                 BUY MASK
               </Nav.Link>
