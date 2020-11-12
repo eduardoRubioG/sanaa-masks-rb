@@ -1,5 +1,6 @@
 @import '../../../src/styles/variables';
 .about {
+  background-color: $dark-orange;
   &__container {
     background-color: $dark-orange;
     padding: 3rem;
@@ -40,6 +41,21 @@
     }
     &--text {
       margin: 0 auto;
+    }
+  }
+}
+
+@media only screen and (min-width: 880px) {
+  .about {
+    &__container {
+      display: flex;
+      justify-content: space-around;
+      max-width: 1090px;
+      margin: 0 auto;
+    }
+
+    &__content {
+      max-width: 420px;
     }
   }
 }
