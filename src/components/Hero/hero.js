@@ -45,10 +45,10 @@ export default function Hero() {
           </div>
 
           <div className="hero__btn-bar" id="about-section">
-            <Button variant="outline-dark" href="#about-section">
+            <Button variant="outline-dark" href="#about-section" className="hero__btn-bar--btn">
               Learn more
             </Button>
-            <Button variant="dark-orange" href="#mask-section">
+            <Button variant="dark-orange" href="#mask-section" className="hero__btn-bar--btn">
               Buy Mask
             </Button>
           </div>

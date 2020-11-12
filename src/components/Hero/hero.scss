@@ -1,4 +1,5 @@
 @import '../../styles/variables';
+
 .hero {
   &__container {
     display: flex;
@@ -51,13 +52,91 @@
     max-width: 275px;
   }
 
+  &__img {
+    max-height: 500px;
+    overflow: hidden;
+  }
+
   &__wave {
     margin-top: auto;
   }
 }
 
+@media only screen and (min-width: 830px) {
+  .hero {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    &__header {
+      &--lg {
+        display: inherit;
+        padding: 1rem;
+        & > h2 {
+          font-weight: 200;
+        }
+      }
+      &--sm {
+        display: none;
+      }
+    }
+    &__subtitle {
+      text-align: left;
+      padding: 0 1rem;
+    }
+    &__btn-bar {
+      margin: 0 auto;
+      flex-direction: column;
+      width: 100%; 
+      padding: 0;
+      &--btn {
+        margin: 3px 0;
+      }
+    }
+    &__img {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      z-index: 99;
+      min-height: 450px;
+      max-width:650px;
+      max-height:650px;
+      padding-left: 10px; 
+      padding-top: 10px;
+      &-backdrop {
+        position: absolute;
+        opacity: 1;
+        background-color: $dark-green;
+        width: 98%;
+        height: 98%;
+        padding: inherit;
+        top: 0; 
+        left: 0;
+      }
+    }
+    &__container {
+      position: relative;
+      height: 95vh;
+      &--lg {
+        display: flex;
+        padding: 2rem;
+        &-text {
+          padding: 3rem;
+          width: 50%;
+          margin: auto 0;
+        }
+      }
+    }
+
+    &__wave {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+}
+
 // desktop
-@media only screen and (min-width: 650px) {
+@media only screen and (min-width: 1130px) {
   .hero {
     display: flex;
     align-content: center;
@@ -80,6 +159,8 @@
     }
     &__btn-bar {
       margin: 0;
+      flex-direction: row;
+      width: 70%;
     }
     &__img {
       position: relative;
