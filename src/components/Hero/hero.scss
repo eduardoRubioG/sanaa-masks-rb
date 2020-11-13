@@ -65,6 +65,7 @@
 
   &__wave {
     margin-top: auto;
+    width: 101vw !important;
   }
 }
 
@@ -136,7 +137,7 @@
     &__wave {
       position: absolute;
       bottom: 0;
-      width: 100%;
+      width: 101vw !important;
     }
   }
 }
@@ -202,7 +203,7 @@
     &__wave {
       position: absolute;
       bottom: 0;
-      width: 100%;
+      width: 101vw !important;
     }
   }
 }
