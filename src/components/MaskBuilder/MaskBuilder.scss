@@ -6,6 +6,12 @@
     margin: 0.25rem;
   }
 
+  &__empty-state {
+    padding: 2rem;
+    font-weight: 200;
+    color: $dark-green;
+  }
+
   &__designer {
     margin-top: 1rem;
     padding: 1rem;
@@ -17,6 +23,7 @@
 
     &--header {
       text-transform: capitalize;
+      font-weight: 200;
       padding: 0 0.5rem;
       display: flex;
       justify-content: space-between;
@@ -27,7 +34,7 @@
       border-bottom: 2px solid rgba(#eae6ce, 0.5);
       & > p {
         margin: auto 0;
-        font-size: 0.85rem;
+        font-size: 0.95rem;
         padding: 0 0.8rem;
       }
     }

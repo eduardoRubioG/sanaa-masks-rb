@@ -25,9 +25,6 @@ export default class WireSelector extends Component {
             <button onClick={this.selectWiredOption}>
             <p className="wired-card">
               Wired
-              <span className="wired-card__info">
-                {' (+$3.00)'}
-              </span>
             </p>
             </button>
           </div>
