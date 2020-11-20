@@ -6,6 +6,7 @@ import WireSelector from "../WireSelector/WireSelector"
 import ButtonGroup from "react-bootstrap/ButtonGroup"
 import Dropdown from "react-bootstrap/Dropdown"
 import MaskProduct from "../MaskProduct/MaskProduct"
+import ScrollAnimation from "react-animate-on-scroll"
 
 export class MaskBuilder extends Component {
   constructor(props) {
@@ -91,7 +92,7 @@ export class MaskBuilder extends Component {
     let wiredPrices = []
     let filteredPrices = []
     let seenPrices = []
-    prices.map(price => {
+    prices.forEach(price => {
       if (seenPrices.includes(price.name)) {
         /* This is probably a wired price that has already been seen */
         // add the normal product and then add the wired product to the wired product list
@@ -212,7 +213,9 @@ export class MaskBuilder extends Component {
           )
         })
       } else {
-        ProductItemRender = <p className="mask-builder__empty-state">Nothing to show here..</p>
+        ProductItemRender = (
+          <p className="mask-builder__empty-state">Nothing to show here..</p>
+        )
       }
     } else {
       const productsToRender = wired ? wiredProducts : products
@@ -232,54 +235,63 @@ export class MaskBuilder extends Component {
     }
     return (
       <section className="mask-builder">
-        <p className="mask-builder__tip">
-          <em>1. Pick mask type</em>
-        </p>
-        <WireSelector
-          wired={wired}
-          handleWiredSelection={this.handleWiredSelection}
-          handleNotWiredSelection={this.handleNotWiredSelection}
-        />
-        <p className="mask-builder__tip">
-          <em>2. Select mask design</em>
-        </p>
-        <div className="mask-builder__designer">
-          <div className="mask-builder__designer--header">
-            <p>{currentType ? currentType : "Select a type"}</p>
-            <Dropdown
-              as={ButtonGroup}
-              id="dropdown-item-button"
-              title="Categories"
-              variant="light-orange"
-            >
-              <Dropdown.Toggle
-                id="categories-dropdown"
+        <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
+          <p className="mask-builder__tip">
+            <em>1. Pick mask type</em>
+          </p>
+        </ScrollAnimation>
+        <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
+          <WireSelector
+            wired={wired}
+            handleWiredSelection={this.handleWiredSelection}
+            handleNotWiredSelection={this.handleNotWiredSelection}
+          />
+        </ScrollAnimation>
+        <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
+          <p className="mask-builder__tip">
+            <em>2. Select mask design</em>
+          </p>
+        </ScrollAnimation>
+        <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
+          <div className="mask-builder__designer">
+            <div className="mask-builder__designer--header">
+              <p>{currentType ? currentType : "Select a type"}</p>
+              <Dropdown
+                as={ButtonGroup}
+                id="dropdown-item-button"
+                title="Categories"
                 variant="light-orange"
-                className="categories-dropdown"
               >
-                Categories
-              </Dropdown.Toggle>
-              <Dropdown.Menu className="categories-dropdown__menu">
-                {types.map(types => {
-                  return (
-                    <Dropdown.Item
-                      className="categories-dropdown__menu--items"
-                      as="button"
-                      key={types}
-                      value={types}
-                      onClick={e => this.setType(e.target.value)}
-                    >
-                      {types}
-                    </Dropdown.Item>
-                  )
-                })}
-              </Dropdown.Menu>
-            </Dropdown>
+                <Dropdown.Toggle
+                  id="categories-dropdown"
+                  variant="light-orange"
+                  className="categories-dropdown"
+                >
+                  Categories
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="categories-dropdown__menu">
+                  {types.map(types => {
+                    return (
+                      <Dropdown.Item
+                        className="categories-dropdown__menu--items"
+                        as="button"
+                        key={types}
+                        value={types}
+                        onClick={e => this.setType(e.target.value)}
+                      >
+                        {types}
+                      </Dropdown.Item>
+                    )
+                  })}
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+
+            <div className="mask-builder__designer--content">
+              {ProductItemRender}
+            </div>
           </div>
-          <div className="mask-builder__designer--content">
-            {ProductItemRender}
-          </div>
-        </div>
+        </ScrollAnimation>
       </section>
     )
   }

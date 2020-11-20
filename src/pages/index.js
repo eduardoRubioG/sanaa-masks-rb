@@ -9,6 +9,7 @@ import Hero from "../components/Hero/hero"
 import About from "../components/About/About"
 import MaskSection from "../components/MaskSection/MaskSection"
 import Cart from "../components/Cart/Cart"
+import "animate.css/animate.min.css";
 
 import SEO from "../components/seo"
 

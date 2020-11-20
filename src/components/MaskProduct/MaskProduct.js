@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 import "./MaskProduct.scss"
 
 function MaskProduct(props) {
-  const { id, image, name, price, wired } = props
+  const { id, image, name, price } = props
   const { addItem, cartDetails } = useShoppingCart()
   const [count, setCount] = useState(0)
 
