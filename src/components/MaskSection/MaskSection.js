@@ -3,6 +3,7 @@ import "./MaskSection.scss"
 
 // Components
 import Humaans from "../Humaans/Humaans"
+import ScrollAnimation from "react-animate-on-scroll"
 import MaskBuilder from "../MaskBuilder/MaskBuilder"
 
 export default class MaskSection extends Component {
@@ -17,13 +18,17 @@ export default class MaskSection extends Component {
       <>
         <section className="mask-section">
           {/* <div className="mask-section__header-container"> */}
-            <div className="mask-section__humaans">
+          <div className="mask-section__humaans">
+            <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
               <Humaans />
-            </div>
+            </ScrollAnimation>
+          </div>
+          <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
             <div className="mask-section__header" id="mask-section">
               <p className="mask-section__header--text">Customize your Mask</p>
               <div className="mask-section__bar" />
             </div>
+          </ScrollAnimation>
           {/* </div> */}
           {/* MaskSelector */}
           <MaskBuilder

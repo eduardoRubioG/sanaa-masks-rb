@@ -4,20 +4,9 @@ import Img from "gatsby-image"
 import "./MaskProduct.scss"
 
 function MaskProduct(props) {
-  const { id, image, name, price, wired, wiredSku } = props
+  const { id, image, name, price } = props
   const { addItem, cartDetails } = useShoppingCart()
   const [count, setCount] = useState(0)
-
-  const addWired = () => {
-    if(wired && wiredSku) {
-      addItem({
-        name: "Wired",
-        sku: wiredSku.id, 
-        price: wiredSku.unit_amount,
-        currency: 'USD'
-      });
-    }
-  }
 
   let ImageElement
   if (image) {
@@ -51,7 +40,6 @@ function MaskProduct(props) {
           currency: "USD",
         })
         setCount(count + 1)
-        addWired()
       }}
     >
       {count > 0 ? (

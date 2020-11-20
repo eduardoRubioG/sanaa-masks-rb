@@ -29,19 +29,17 @@ module.exports = {
         start_url: `/`,
         background_color: `#20232a`,
         theme_color: `#20232a`,
+        icon: `src/images/icon.png`,
         display: `minimal-ui`,
       },
     },
     {
       resolve: `gatsby-source-stripe`,
       options: {
-        objects: ['Product', 'Sku', 'Price'],
+        objects: ['Product', 'Price'],
         secretKey: process.env.GATSBY_STRIPE_SECRET_KEY,
         downloadFiles: true,
       }
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 }

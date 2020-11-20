@@ -6,6 +6,7 @@ import WireSelector from "../WireSelector/WireSelector"
 import ButtonGroup from "react-bootstrap/ButtonGroup"
 import Dropdown from "react-bootstrap/Dropdown"
 import MaskProduct from "../MaskProduct/MaskProduct"
+import ScrollAnimation from "react-animate-on-scroll"
 
 export class MaskBuilder extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export class MaskBuilder extends Component {
       currentType: "Select a type",
       products: [],
       filteredProducts: [],
-      wiredSku: {},
+      wiredProducts: [],
     }
     this.handleWiredSelection = this.handleWiredSelection.bind(this)
     this.handleNotWiredSelection = this.handleNotWiredSelection.bind(this)
@@ -42,23 +43,32 @@ export class MaskBuilder extends Component {
     const serializedProducts = productData
       .map(product => this.serializeProductData(product))
       .filter(data => Boolean(data))
-    this.setWiredData(priceData)
+    const splitPrices = this.checkForWiredPrices(serializedPrices)
+
+    this.mergeProductsAndPrices(
+      splitPrices.nonWiredProducts,
+      serializedProducts
+    )
+    this.mergeProductsAndPrices(
+      splitPrices.wiredProducts,
+      serializedProducts,
+      true
+    )
+  }
+
+  mergeProductsAndPrices(prices, products, wiredPass = false) {
     let merged = []
     let types = []
-    if (serializedPrices.length && serializedProducts.length) {
-      for (
-        let i = 0;
-        i < serializedPrices.length && i < serializedProducts.length;
-        i++
-      ) {
+    if (prices.length && products.length) {
+      for (let i = 0; i < prices.length && i < products.length; i++) {
         merged.push({
-          ...serializedProducts[i],
-          ...serializedPrices.find(
-            itmInner => itmInner.name === serializedProducts[i].name
-          ),
+          ...products[i],
+          ...prices.find(itmInner => itmInner.name === products[i].name),
         })
       }
-      if (merged.length) {
+      // We only want this to run if we're looking at non wired products since it's
+      // the base product list
+      if (merged.length && !wiredPass) {
         merged.forEach(product => {
           if (product.type) {
             types.push(...product.type)
@@ -66,26 +76,49 @@ export class MaskBuilder extends Component {
         })
         types.unshift("All")
         types = [...new Set(types)]
-        this.setState({ types: types })
+        this.setState({
+          types: types && types.length ? types : ["No categories available"],
+          products: merged && merged.length ? merged : [],
+        })
+      } else {
+        this.setState({
+          wiredProducts: merged && merged.length ? merged : [],
+        })
       }
     }
-
-    this.setState({
-      types: types && types.length ? types : ["No categories available"],
-      products: merged && merged.length ? merged : [],
-    })
   }
 
-  setWiredData(prices) {
-    const wiredSku =
-      prices &&
-      prices.length &&
-      prices.filter(
-        price =>
-          price.node.product.name === "Wired" ||
-          price.node.product.name === "wired"
-      )
-    this.setState({ wiredSku: wiredSku[0].node ? wiredSku[0].node : undefined });
+  checkForWiredPrices(prices) {
+    let wiredPrices = []
+    let filteredPrices = []
+    let seenPrices = []
+    prices.forEach(price => {
+      if (seenPrices.includes(price.name)) {
+        /* This is probably a wired price that has already been seen */
+        // add the normal product and then add the wired product to the wired product list
+        const matchingIndex = filteredPrices.findIndex(
+          seen => seen.name === price.name
+        )
+        wiredPrices.push({
+          id: price.id,
+          name: filteredPrices[matchingIndex].name,
+          type: filteredPrices[matchingIndex].type,
+          price: Math.max(filteredPrices[matchingIndex].price, price.price),
+        })
+        filteredPrices[matchingIndex].price = Math.min(
+          filteredPrices[matchingIndex].price,
+          price.price
+        )
+      } else {
+        // This is not a wired price so add to filteredPrices & add.product name to seen
+        filteredPrices.push(price)
+        seenPrices.push(price.name)
+      }
+    })
+    return {
+      nonWiredProducts: filteredPrices,
+      wiredProducts: wiredPrices,
+    }
   }
 
   serializePriceData(price) {
@@ -118,15 +151,30 @@ export class MaskBuilder extends Component {
   }
 
   filterProducts(typeFilter) {
-    const { products } = this.state
+    const { products, wiredProducts, wired } = this.state
     let filteredProducts = []
-    if (products && products.length) {
-      filteredProducts = products.filter(
-        product =>
-          product.type &&
-          product.type.length &&
-          product.type.includes(typeFilter)
-      )
+    if (typeFilter === "All") {
+      filteredProducts = wired ? wiredProducts : products
+    } else {
+      if (wired) {
+        if (wiredProducts && wiredProducts.length) {
+          filteredProducts = wiredProducts.filter(
+            product =>
+              product.type &&
+              product.type.length &&
+              product.type.includes(typeFilter)
+          )
+        }
+      } else {
+        if (products && products.length) {
+          filteredProducts = products.filter(
+            product =>
+              product.type &&
+              product.type.length &&
+              product.type.includes(typeFilter)
+          )
+        }
+      }
     }
     this.setState({
       filteredProducts:
@@ -140,91 +188,110 @@ export class MaskBuilder extends Component {
   }
 
   render() {
-    const { wired, types, currentType, products, filteredProducts, wiredSku } = this.state
+    const {
+      wired,
+      types,
+      currentType,
+      products,
+      wiredProducts,
+      filteredProducts,
+    } = this.state
     let ProductItemRender
-    if (filteredProducts && filteredProducts.length) {
-      ProductItemRender = filteredProducts.map((product, idx) => {
-        return (
-          <MaskProduct
-            id={product.id || undefined}
-            name={product.name || undefined}
-            image={product.image || undefined}
-            price={product.price || undefined}
-            type={product.type || undefined}
-            key={product.id || idx}
-            wired={wired}
-            wiredSku={wiredSku}
-          ></MaskProduct>
+    if (currentType !== "Select a type") {
+      if (filteredProducts && filteredProducts.length) {
+        ProductItemRender = filteredProducts.map((product, idx) => {
+          return (
+            <MaskProduct
+              id={product.id || undefined}
+              name={product.name || undefined}
+              image={product.image || undefined}
+              price={product.price || undefined}
+              type={product.type || undefined}
+              key={product.id || idx}
+              wired={wired}
+            ></MaskProduct>
+          )
+        })
+      } else {
+        ProductItemRender = (
+          <p className="mask-builder__empty-state">Nothing to show here..</p>
         )
-      })
-    } else if (products && products.length) {
-      ProductItemRender = products.map((product, idx) => {
-        return (
-          <MaskProduct
-            id={product.id || undefined}
-            name={product.name || undefined}
-            image={product.image || undefined}
-            price={product.price || undefined}
-            type={product.type || undefined}
-            key={product.id || idx}
-            wired={wired}
-            wiredSku={wiredSku}
-          ></MaskProduct>
-        )
-      })
+      }
     } else {
-      ProductItemRender = <p>Nothing to show here..</p>
+      const productsToRender = wired ? wiredProducts : products
+      ProductItemRender = productsToRender.map((product, idx) => {
+        return (
+          <MaskProduct
+            id={product.id || undefined}
+            name={product.name || undefined}
+            image={product.image || undefined}
+            price={product.price || undefined}
+            type={product.type || undefined}
+            key={product.id || idx}
+            wired={wired}
+          ></MaskProduct>
+        )
+      })
     }
     return (
       <section className="mask-builder">
-        <p className="mask-builder__tip">
-          <em>1. Pick mask type</em>
-        </p>
-        <WireSelector
-          wired={wired}
-          handleWiredSelection={this.handleWiredSelection}
-          handleNotWiredSelection={this.handleNotWiredSelection}
-        />
-        <p className="mask-builder__tip">
-          <em>2. Select mask design</em>
-        </p>
-        <div className="mask-builder__designer">
-          <div className="mask-builder__designer--header">
-            <p>{currentType ? currentType : "Select a type"}</p>
-            <Dropdown
-              as={ButtonGroup}
-              id="dropdown-item-button"
-              title="Categories"
-              variant="light-orange"
-            >
-              <Dropdown.Toggle
-                id="categories-dropdown"
+        <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
+          <p className="mask-builder__tip">
+            <em>1. Pick mask type</em>
+          </p>
+        </ScrollAnimation>
+        <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
+          <WireSelector
+            wired={wired}
+            handleWiredSelection={this.handleWiredSelection}
+            handleNotWiredSelection={this.handleNotWiredSelection}
+          />
+        </ScrollAnimation>
+        <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
+          <p className="mask-builder__tip">
+            <em>2. Select mask design</em>
+          </p>
+        </ScrollAnimation>
+        <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
+          <div className="mask-builder__designer">
+            <div className="mask-builder__designer--header">
+              <p>{currentType ? currentType : "Select a type"}</p>
+              <Dropdown
+                as={ButtonGroup}
+                id="dropdown-item-button"
+                title="Categories"
                 variant="light-orange"
-                className="categories-dropdown"
               >
-                Categories
-              </Dropdown.Toggle>
-              <Dropdown.Menu className="categories-dropdown__menu">
-                {types.map(types => {
-                  return (
-                    <Dropdown.Item
-                      className="categories-dropdown__menu--items"
-                      as="button"
-                      key={types}
-                      value={types}
-                      onClick={e => this.setType(e.target.value)}
-                    >
-                      {types}
-                    </Dropdown.Item>
-                  )
-                })}
-              </Dropdown.Menu>
-            </Dropdown>
+                <Dropdown.Toggle
+                  id="categories-dropdown"
+                  variant="light-orange"
+                  className="categories-dropdown"
+                >
+                  Categories
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="categories-dropdown__menu">
+                  {types.map(types => {
+                    return (
+                      <Dropdown.Item
+                        className="categories-dropdown__menu--items"
+                        as="button"
+                        key={types}
+                        value={types}
+                        onClick={e => this.setType(e.target.value)}
+                      >
+                        {types}
+                      </Dropdown.Item>
+                    )
+                  })}
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+
+            <div className="mask-builder__designer--content">
+              {ProductItemRender}
+            </div>
           </div>
-          <div className="mask-builder__designer--content">
-            {ProductItemRender}
-          </div>
-        </div>
+        </ScrollAnimation>
       </section>
     )
   }
