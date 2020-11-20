@@ -1,9 +1,9 @@
 {
   "name": "gatsby-starter-react-bootstrap",
   "private": true,
-  "description": "A starter that includes and configures react-bootstrap and react-icons, along with SASS handling. ",
+  "description": "An ecommerce site that includes and configures react-bootstrap and react-icons, along with SASS handling and stripe.js. ",
   "version": "0.1.0",
-  "author": "Billy Jacoby <billyjacoby@gmail.com>",
+  "author": "Eduardo Rubio <eduardo.rubio.jr85@gmail.com>",
   "dependencies": {
     "@stripe/stripe-js": "^1.11.0",
     "animate.css": "^4.1.1",
