@@ -42,7 +42,7 @@ function Instagram() {
             aria-hidden="true"
           ><p style={{ fontSize: 0}}>Link to navigate to instagram</p></a>
           <BsHeartFill className="instagram__icon-fill" />
-          <Img fluid={img} />
+          <Img fluid={img} className="instagram__img-obj"/>
         </div>
       </ScrollAnimation>
     ))
