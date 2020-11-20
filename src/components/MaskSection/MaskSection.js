@@ -19,11 +19,11 @@ export default class MaskSection extends Component {
         <section className="mask-section">
           {/* <div className="mask-section__header-container"> */}
           <div className="mask-section__humaans">
-            <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
+            <ScrollAnimation animateIn="animate__fadeInUp" animateOnce={true} offset={35}>
               <Humaans />
             </ScrollAnimation>
           </div>
-          <ScrollAnimation animateIn="animate__fadeInUp" offset={35}>
+          <ScrollAnimation animateIn="animate__fadeInUp" animateOnce={true} offset={35}>
             <div className="mask-section__header" id="mask-section">
               <p className="mask-section__header--text">Customize your Mask</p>
               <div className="mask-section__bar" />

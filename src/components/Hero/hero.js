@@ -29,7 +29,7 @@ export default function Hero() {
   return (
     <div className="hero__container">
     <ScrollAnimation animateIn="animate__fadeIn" offset={35} animateOnce={true} duration={2}
-    style={{ width: '100%', zIndex: '9999'}}>
+    style={{ width: '100%', zIndex: '25'}}>
         <div className="hero__container--lg">
           <div className="hero__container--lg-text">
             {/* No. 1 */}

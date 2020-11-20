@@ -7,6 +7,7 @@ import { CartProvider } from "use-shopping-cart"
 import Layout from "../components/layout"
 import Hero from "../components/Hero/hero"
 import About from "../components/About/About"
+import Instagram from "../components/Instagram/Instagram"
 import MaskSection from "../components/MaskSection/MaskSection"
 import Cart from "../components/Cart/Cart"
 import "animate.css/animate.min.css";
@@ -42,6 +43,7 @@ const IndexPage = ({ data }) => (
         />
         <Cart />
       </section>
+      <Instagram />
     </Layout>
   </CartProvider>
 )

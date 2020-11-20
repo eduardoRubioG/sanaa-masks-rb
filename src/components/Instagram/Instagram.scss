@@ -1,0 +1,60 @@
+@import '../../styles/variables';
+.instagram {
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  padding: 2rem;
+  padding-top: 1rem;
+  &__container {
+    background-color:$light-green;
+  }
+  &__header {
+    color: $off-white;
+    font-weight: 200;
+    font-size: 24px;
+    margin-left: 2rem;
+    padding-top: 1rem;
+    &--bar {
+      width: 15%; 
+      max-width: 75px;
+      height: 2px;
+      background-color: $off-white; 
+      margin-left: 5px;
+      margin-bottom: 1rem;
+    }
+  }
+  &__img {
+    position: relative;
+    max-width: 400px;
+    transform: scale(1);
+    transition: transform 170ms linear;
+    &:hover,&:focus {
+      .instagram__icon-fill {
+        opacity: 1;
+      }
+      transition: transform 170ms linear;
+      transform: scale(1.03);
+    }
+  }
+  &__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+  &__icon-wire, &__icon-fill {
+    transition: opacity 200ms linear;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -1.5rem;
+    margin-top: -1.5rem;
+    z-index: 2;
+    font-size: 3rem;
+    color: rgba(red, 0.9);
+    opacity: 0;
+    pointer-events: none;
+  }
+}
