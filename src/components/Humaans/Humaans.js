@@ -2,7 +2,7 @@ import React from "react"
 
 export default function Humaans() {
   return (
-    <div>
+    <div style={{ pointerEvents: 'none'}}>
       <svg
         width="100%"
         height="100%"

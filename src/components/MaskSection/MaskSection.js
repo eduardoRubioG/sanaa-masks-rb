@@ -18,7 +18,7 @@ export default class MaskSection extends Component {
       <>
         <section className="mask-section">
           {/* <div className="mask-section__header-container"> */}
-          <div className="mask-section__humaans">
+          <div className="mask-section__humaans" style={{ pointerEvents: 'none'}}>
             <ScrollAnimation animateIn="animate__fadeInUp" animateOnce={true} offset={35}>
               <Humaans />
             </ScrollAnimation>
