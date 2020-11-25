@@ -235,24 +235,43 @@ export class MaskBuilder extends Component {
     }
     return (
       <section className="mask-builder">
-        <ScrollAnimation animateIn="animate__fadeInUp" animateOnce={true} offset={35}>
+        <ScrollAnimation
+          animateIn="animate__fadeInUp"
+          animateOnce={true}
+          offset={35}
+        >
           <p className="mask-builder__tip">
             <em>1. Pick mask type</em>
           </p>
         </ScrollAnimation>
-        <ScrollAnimation animateIn="animate__fadeInUp" animateOnce={true} offset={35}>
+        <ScrollAnimation
+          animateIn="animate__fadeInUp"
+          animateOnce={true}
+          offset={35}
+        >
           <WireSelector
             wired={wired}
             handleWiredSelection={this.handleWiredSelection}
             handleNotWiredSelection={this.handleNotWiredSelection}
           />
         </ScrollAnimation>
-        <ScrollAnimation animateIn="animate__fadeInUp" animateOnce={true} offset={35}>
-          <p className="mask-builder__tip">
-            <em>2. Select mask design</em>
-          </p>
+        <ScrollAnimation
+          animateIn="animate__fadeInUp"
+          animateOnce={true}
+          offset={35}
+        >
+          <div>
+            <p className="mask-builder__tip">
+              <em>2. Select mask design</em>
+            </p>
+            <p style={{ fontSize: '0.8rem', opacity: '0.7'}}>Click on any mask to see a larger image of the available fabric!</p>
+          </div>
         </ScrollAnimation>
-        <ScrollAnimation animateIn="animate__fadeInUp" animateOnce={true} offset={35}>
+        <ScrollAnimation
+          animateIn="animate__fadeInUp"
+          animateOnce={true}
+          offset={35}
+        >
           <div className="mask-builder__designer">
             <div className="mask-builder__designer--header">
               <p>{currentType ? currentType : "Select a type"}</p>

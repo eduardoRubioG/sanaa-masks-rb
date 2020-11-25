@@ -52,6 +52,27 @@
       opacity: 0;
     }
   }
+
+  &__confirm-modal {
+    color: $dark-green;
+    font-weight: 300;
+    &--theme {
+      background-color: $off-white;
+      display: flex;
+    }
+    &__btn {
+      &--clear {}
+      &--cancel {
+        color: $off-white;
+        &:focus, &:hover {
+          color: $off-white;
+        }
+      }
+    }
+    &--img {
+      margin: 0 auto;
+    }
+  }
 }
 
 @media only screen and (min-width: 830px) {
