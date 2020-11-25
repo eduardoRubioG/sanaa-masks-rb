@@ -11,7 +11,7 @@ export const stepData = {
   },
   three: {
     header: 'Checkout! It’s that easy!',
-    text: '10% of all proceeds are donated to a Go-FundMe or non-profit of the owner’s choice. You can choose to donate an additional amount at checkout. The organization changes about every month so that a diverse pool of people are receiving aid in some form.  '
+    text: '10% of all proceeds are donated to a Go-FundMe or non-profit of the owner’s choice. The organization changes about every month so that a diverse pool of people are receiving aid in some form.  '
   }
 }
 

@@ -4,6 +4,7 @@ import "./About.scss"
 // Components
 import NumberIcon from "../NumberIcon/NumberIcon"
 import ScrollAnimation from "react-animate-on-scroll"
+import AccordionStep from "../AccordionStep/AccordionStep"
 import { aboutTheOwnerText, stepData } from "../content"
 // import DonationCounter from "../DonationCounter/DonationCounter"
 
@@ -22,30 +23,8 @@ export default function About() {
           <div className="about__content">
             <p className="about__content--header">How it works</p>
             <div className="about__content--bar" />
-
-            <div className="about__direction-items">
-              <NumberIcon value="1" />
-              <div className="about__direction-items--container">
-                <p className="about__direction-items--text">
-                  {stepData.one.header}
-                </p>
-              </div>
-            </div>
-            <div className="about__direction-items">
-              <NumberIcon value="2" />
-              <div className="about__direction-items--container">
-                <p className="about__direction-items--text">
-                  {stepData.two.header}
-                </p>
-              </div>
-            </div>
-            <div className="about__direction-items">
-              <NumberIcon value="3" />
-              <div className="about__direction-items--container">
-                <p className="about__direction-items--text">
-                  {stepData.three.header}
-                </p>
-              </div>
+            <div style={{ margin: '0', padding: '0'}}>
+              <AccordionStep/>
             </div>
           </div>
         </ScrollAnimation>
