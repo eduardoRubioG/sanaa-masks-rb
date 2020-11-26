@@ -2,10 +2,9 @@ import React from "react"
 import "./About.scss"
 
 // Components
-import NumberIcon from "../NumberIcon/NumberIcon"
 import ScrollAnimation from "react-animate-on-scroll"
 import AccordionStep from "../AccordionStep/AccordionStep"
-import { aboutTheOwnerText, stepData } from "../content"
+import { aboutTheOwnerText } from "../content"
 // import DonationCounter from "../DonationCounter/DonationCounter"
 
 export default function About() {

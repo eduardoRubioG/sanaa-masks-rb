@@ -58,6 +58,7 @@ export const query = graphql`
             name
             metadata {
               type
+              Type
             }
           }
           unit_amount

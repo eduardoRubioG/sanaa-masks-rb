@@ -128,13 +128,23 @@ export class MaskBuilder extends Component {
       : {
           id: price.node.id || undefined,
           name: price.node.product.name || undefined,
-          type: price.node.product.metadata.type
-            ? price.node.product.metadata.type
-                .split(",")
-                .map(item => item.trim())
-            : undefined,
+          type: this.serializeTypeData(price.node.product.metadata),
           price: price.node.unit_amount || undefined,
         }
+  }
+
+  serializeTypeData(metadata, prod) {
+      let types = []; 
+      if(metadata.Type && metadata.Type.length) {
+        // parse Type 
+        types.push(...metadata.Type.split(",").map(item => item.trim()));
+      } 
+      if( metadata.type && metadata.type.length ) {
+        // parse type 
+        types.push(...metadata.type.split(",").map(item => item.trim()));
+      }
+      // join both type and Type 
+      return types && types.length ? [...new Set(types)] : undefined;
   }
 
   serializeProductData(product) {
