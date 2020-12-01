@@ -57,6 +57,7 @@ export const query = graphql`
           product {
             name
             metadata {
+              deleted
               type
               Type
             }

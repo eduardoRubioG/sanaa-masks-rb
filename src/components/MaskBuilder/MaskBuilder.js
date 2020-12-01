@@ -60,14 +60,22 @@ export class MaskBuilder extends Component {
     let merged = []
     let types = []
     if (prices.length && products.length) {
-      for (let i = 0; i < prices.length && i < products.length; i++) {
-        merged.push({
-          ...products[i],
-          ...prices.find(itmInner => itmInner.name === products[i].name),
-        })
+      for (let i = 0; i < Math.min(prices.length, products.length); i++) {
+        const currProduct = products[i];
+        const currPrice = prices.find(itmInner => itmInner.name === products[i].name);
+        let mergedProduct = currPrice === undefined ? currPrice : {
+          ...currProduct,
+          ...currPrice,
+        };
+        if(mergedProduct && mergedProduct.deleted !== 'true' ){
+          merged.push(mergedProduct);
+        }
       }
+
       // We only want this to run if we're looking at non wired products since it's
       // the base product list
+      //
+      // This piece just sets the categories 
       if (merged.length && !wiredPass) {
         merged.forEach(product => {
           if (product.type) {
@@ -103,6 +111,7 @@ export class MaskBuilder extends Component {
           id: price.id,
           name: filteredPrices[matchingIndex].name,
           type: filteredPrices[matchingIndex].type,
+          deleted: filteredPrices[matchingIndex].deleted,
           price: Math.max(filteredPrices[matchingIndex].price, price.price),
         })
         filteredPrices[matchingIndex].price = Math.min(
@@ -122,18 +131,18 @@ export class MaskBuilder extends Component {
   }
 
   serializePriceData(price) {
-    return price.node.product.name === "Wired" ||
-      price.node.product.name === "wired"
+    return price.node.product.name === "Wired" || price.node.product.name === "wired"
       ? undefined
       : {
           id: price.node.id || undefined,
           name: price.node.product.name || undefined,
           type: this.serializeTypeData(price.node.product.metadata),
           price: price.node.unit_amount || undefined,
+          deleted: price.node.product.metadata.deleted || "false",
         }
   }
 
-  serializeTypeData(metadata, prod) {
+  serializeTypeData(metadata) {
       let types = []; 
       if(metadata.Type && metadata.Type.length) {
         // parse Type 

@@ -39,13 +39,6 @@ function MaskProduct(props) {
       <button
         className="mask-product"
         onClick={() =>
-          // addItem({
-          //   name: name || undefined,
-          //   sku: id || undefined,
-          //   price: price || undefined,
-          //   currency: "USD",
-          // })
-          // setCount(count + 1)
           setAddConfirmation(true)
         }
       >
@@ -77,7 +70,11 @@ function MaskProduct(props) {
           <Modal.Title className="mask-product__confirm-modal--theme">{`Add ${name} to cart?`}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="mask-product__confirm-modal--theme">
-          <Img fixed={image} className="mask-product__confirm-modal--img" />
+        {
+          image 
+          ? <Img fixed={image} className="mask-product__confirm-modal--img" />
+          : <p>There's no image here, but I'm sure it'll look great on you!</p>
+        }
         </Modal.Body>
         <Modal.Footer className="mask-product__confirm-modal--theme">
           <Button
