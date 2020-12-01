@@ -169,10 +169,10 @@ export class MaskBuilder extends Component {
         }
   }
 
-  filterProducts(typeFilter) {
-    const { products, wiredProducts, wired } = this.state
+  filterProducts() {
+    const { products, wiredProducts, wired, currentType } = this.state
     let filteredProducts = []
-    if (typeFilter === "All") {
+    if (currentType === "All") {
       filteredProducts = wired ? wiredProducts : products
     } else {
       if (wired) {
@@ -181,7 +181,7 @@ export class MaskBuilder extends Component {
             product =>
               product.type &&
               product.type.length &&
-              product.type.includes(typeFilter)
+              product.type.includes(currentType)
           )
         }
       } else {
@@ -190,7 +190,7 @@ export class MaskBuilder extends Component {
             product =>
               product.type &&
               product.type.length &&
-              product.type.includes(typeFilter)
+              product.type.includes(currentType)
           )
         }
       }
@@ -198,12 +198,19 @@ export class MaskBuilder extends Component {
     this.setState({
       filteredProducts:
         filteredProducts && filteredProducts.length ? filteredProducts : [],
-      currentType: typeFilter,
+      currentType: currentType,
     })
   }
 
   setType(value) {
-    this.filterProducts(value)
+    this.setState({ currentType: value });
+  }
+
+  componentDidUpdate(previousProps, previousState) {
+    const { wired, currentType } = this.state;
+    if(previousState.wired !== wired || previousState.currentType !== currentType) {
+      this.filterProducts();
+    }
   }
 
   render() {
